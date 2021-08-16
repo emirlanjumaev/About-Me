@@ -1,0 +1,29 @@
+/*-------------
+color
+------------*/
+$skin-color: #fb839e;
+
+/*-----------
+FONTS
+------------*/
+$relaway: "Raleway", sans-serif;
+
+/*---------------
+BACKGROUND
+----------------*/
+
+$bg-black-900: #000;
+$bg-black-100: #ddd;
+$bg-black-50: #ececf3;
+$text-black-900: #000;
+$text-black-700: #555;
+$text-black-600: #666;
+$text-black-300: #bbb;
+
+/*--------------
+SHADOW
+----------------*/
+$outer-shadow: 3px 3px 3px #d0d0d0, -3px -3px 3px #f8f8f8;
+$outer-shadow-0: 0 0 0 #d0d0d0, 0 0 0 #f8f8f8;
+$inner-shadow: inset 3px 3px 3px #d0d0d0, -3px 4px 3px #f8f8f8;
+$inner-shadow-0: 0 0 0 #d0d0d0, inset 0 0 0 #f8f8f8;

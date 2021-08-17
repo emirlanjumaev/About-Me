@@ -7,6 +7,10 @@ body {
   line-height: 1.3;
   overflow-x: hidden;
   background-color: $bg-black-50;
+
+  &.stopScrolling {
+    overflow-y: hidden;
+  }
 }
 
 .mw-100 {
@@ -988,7 +992,40 @@ portfolio-popup
   overflow-y: auto;
   opacity: 0;
   visibility: hidden;
+  transition: all 0.3s ease;
 
+  &.open {
+    visibility: visible;
+    opacity: 1;
+  }
+  .pp-loader {
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 1005;
+    background-color: $bg-opacity;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    visibility: hidden;
+    opacity: 0;
+
+    &.active {
+      visibility: visible;
+      opacity: 1;
+    }
+
+    div {
+      height: 40px;
+      width: 40px;
+      border: 4px solid $skin-color;
+      border-radius: 50%;
+      border-right: 3px solid transparent;
+      animation: spin 2s linear infinite;
+    }
+  }
   .pp-main {
     min-height: 100vh;
     max-width: 1350px;

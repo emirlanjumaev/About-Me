@@ -27,6 +27,10 @@
 })();
 
 
+function bodyScrollingToggle(){
+    document.body.classList.toggle("stopScrolling");
+}
+
 
 
 /*------------------------- PORTFOLIO FILTER AND POPUP ----------------------------- */
@@ -41,7 +45,7 @@
     projectDetalisContainer = popup.querySelector(".pp-detalis"),
     projectDetalisBtn = popup.querySelectorAll(".pp-project-detalis-btn");
 
-    let itemIndex, slideIndex, screenshots;
+    let itemIndex, slideIndex, scrinshots;
     
     /* filter portfolio items */
 
@@ -73,15 +77,48 @@
     })
 
     portfolioContainer.addEventListener('click', function(event){
-    if(event.target.closest(".portfolio-item-inner")){
-        const portfolioItem = event.target.closest(".portfolio-item-inner").parentElement;
-        itemIndex = Array.from(portfolioItem.parentElement.children).indexOf(portfolioItem);
-        screenshots = portfolioItems[itemIndex].querySelector(".portfolio-item-img").getAttribute("data-scrinshots");
-        console.log(screenshots)
-    }
+        if(event.target.closest(".portfolio-irem-inner")){
+            const portfolioItem = event.target.closest(".portfolio-irem-inner").parentElement;
 
+            itemIndex = Array.from(portfolioItem.parentElement.children).indexOf(portfolioItem)
+
+            scrinshots = portfolioItems[itemIndex].querySelector(".portfolio-item-img img").getAttribute("data-scrinshots");
+            scrinshots = scrinshots.split(",");
+            slideIndex = 0;
+            popupToggle();
+            popupSlideshow()
+            // popupDetalis();
+        }
+    })
+    
+    close.addEventListener("click", ()=>{
+        popupToggle()
     })
 
+    function popupToggle(){
 
+        popup.classList.toggle("open");
+        bodyScrollingToggle()
+    }
+
+           
+    function  popupSlideshow(){
+        const imgSrc = scrinshots[slideIndex];
+        const popupImg = popup.querySelector(".pp-img");
+        popup.querySelector(".pp-loader").classList.add("active");
+        popupImg.src=imgSrc;
+        popupImg.onload = () =>{
+
+        popup.querySelector(".pp-loader").classList.remove("active");
+        }
+        popup.querySelector(".pp-counter").innerHTML = (slideIndex+1) + " of " +scrinshots.length;
+    }
+
+    projectDetalisBtn.addEventListener('click', function(){
+        popupDetalisToggle();
+    })
+    function popupDetalisToggle(){
+        console.log("h")
+    }   
 
 })()    

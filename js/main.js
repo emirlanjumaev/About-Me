@@ -39,9 +39,9 @@ function bodyScrollingToggle(){
     portfolioContainer = document.querySelector(".portfolio-items"),
     portfolioItems = document.querySelectorAll(".portfolio-item"),
     popup = document.querySelector(".portfolio-popup"),
-    prevBtn = popup.querySelector(".pp-prev"),
-    nextBtn = popup.querySelector(".pp-next"),
-    close = popup.querySelector(".pp-close"),
+    prevBtn = document.querySelector(".pp-prev"),
+    nextBtn = document.querySelector(".pp-next"),
+    close = document.querySelector(".pp-close"),
     projectDetalisContainer = popup.querySelector(".pp-detalis"),
     projectDetalisBtn = popup.querySelectorAll(".pp-project-detalis-btn");
 
@@ -55,7 +55,7 @@ function bodyScrollingToggle(){
         !event.target.classList.contains("active")){
 
             filterContainer.querySelector(".active").classList.remove(
-            "active")
+            "active");
             
             event.target.classList.add('active');
             const target = event.target.getAttribute("data-target");
@@ -69,12 +69,14 @@ function bodyScrollingToggle(){
                 else{
                     item.classList.remove("show");
                     item.classList.add("hide");
-                }
-            })
+                };
+            });
         
-        }
+        };
 
-    })
+    });
+
+   
 
     portfolioContainer.addEventListener('click', function(event){
         if(event.target.closest(".portfolio-irem-inner")){
@@ -88,21 +90,21 @@ function bodyScrollingToggle(){
             popupToggle();
             popupSlideshow()
             // popupDetalis();
-        }
-    })
+        };
+    });
     
     close.addEventListener("click", ()=>{
-        popupToggle()
+        popupToggle();
     })
 
     function popupToggle(){
 
         popup.classList.toggle("open");
-        bodyScrollingToggle()
+        bodyScrollingToggle();
     }
 
            
-    function  popupSlideshow(){
+    function popupSlideshow(){
         const imgSrc = scrinshots[slideIndex];
         const popupImg = popup.querySelector(".pp-img");
         popup.querySelector(".pp-loader").classList.add("active");
@@ -114,11 +116,53 @@ function bodyScrollingToggle(){
         popup.querySelector(".pp-counter").innerHTML = (slideIndex+1) + " of " +scrinshots.length;
     }
 
-    projectDetalisBtn.addEventListener('click', function(){
-        popupDetalisToggle();
-    })
-    function popupDetalisToggle(){
-        console.log("h")
-    }   
+ 
+})();    
+ 
 
-})()    
+(()=>{
+
+    const sliderContainer = document.querySelector('.testi-slider-container'),
+    slides = sliderContainer.querySelectorAll('.testi-item'),
+    slideWidth = sliderContainer.offsetWidth,
+    prevBtn = document.querySelector('.testi-slider-nav .prev');
+    nextBtn = document.querySelector('.testi-slider-nav .next');
+    activeSlide = sliderContainer.querySelector('.testi-item.active')
+    let slideIndex = Array.from(activeSlide.parentElement.children).indexOf(activeSlide);
+    console.log(slideIndex)
+
+    slides.forEach(function(slide){
+        slide.style.width = slideWidth + "px";
+    })
+
+    sliderContainer.style.width = slideWidth * slides.length + "px";
+
+    nextBtn.addEventListener('click', () =>{
+
+     if (slideIndex === slides.length-1){
+         slideIndex = 0;
+     }
+     else{
+         slideIndex++
+     }
+     
+    slider()
+    })
+
+    prevBtn.addEventListener('click', ()=>{
+        if(slideIndex === 0){
+            slideIndex = slides.length-1;
+        }
+        else{
+            slideIndex--;
+        }
+    slider()
+    })
+    function slider(){
+        sliderContainer.querySelector(".testi-item.active").classList.remove("active");
+
+        slides[slideIndex].classList.add("active")
+    sliderContainer.style.marginLeft =  - (slideWidth * slideIndex) + "px";
+
+    }
+})()

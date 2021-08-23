@@ -8,9 +8,9 @@ body {
   overflow-x: hidden;
   background-color: $bg-black-50;
 
-  &.stopScrolling {
-    overflow-y: hidden;
-  }
+  // &.stopScrolling {
+  //   overflow-y: hidden;
+  // }
 }
 
 .mw-100 {
@@ -308,6 +308,20 @@ ANIMATION
   }
 }
 
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+.section.hide {
+  display: none;
+}
+
 /*--------------
 header
 ----------------*/
@@ -373,6 +387,23 @@ header
   }
 }
 
+.fade-out-effect {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: $bg-black-50;
+  z-index: -1;
+  visibility: hidden;
+
+  &.active {
+    visibility: visible;
+    z-index: 1000;
+    animation: fadeOut 0.2s ease-out;
+  }
+}
+
 /*------------------
 NAVIGATION MENU
 -------------------*/
@@ -389,6 +420,14 @@ NAVIGATION MENU
   overflow-y: auto;
   visibility: hidden;
   overflow-y: auto;
+
+  &.open {
+    visibility: visible;
+    opacity: 1;
+    z-index: 999;
+    transition: all 0.2s linear;
+  }
+
   ul {
     padding: 15px;
     text-align: center;
